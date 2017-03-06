@@ -56,10 +56,12 @@ class Bye:
     @byeset_msg.command(pass_context=True, name="add", no_pm=True)
     async def byeset_msg_add(self, ctx, *, format_msg):
         """Adds a bye message format for the server to be chosen at random
+
         {0} is user
         {1} is server
         Default is set to:
             bye {0.name} to {1.name}!
+
         Example formats:
             {0.mention}.. What are you doing here?
             {1.name} has a new member! {0.name}#{0.discriminator} - {0.id}
@@ -119,6 +121,7 @@ class Bye:
     @byeset.command(pass_context=True)
     async def channel(self, ctx, channel : discord.Channel=None):
         """Sets the channel to send the bye message
+
         If channel isn't specified, the server's default channel will be used"""
         server = ctx.message.server
         if channel is None:
@@ -146,6 +149,7 @@ class Bye:
     @byeset_bot.command(pass_context=True, name="msg", no_pm=True)
     async def byeset_bot_msg(self, ctx, *, format_msg=None):
         """Set the bye msg for bots.
+
         Leave blank to reset to regular user bye"""
         server = ctx.message.server
         self.settings[server.id]["BOTS_MSG"] = format_msg
@@ -160,6 +164,7 @@ class Bye:
     @byeset_bot.command(pass_context=True, name="role", no_pm=True)
     async def byeset_bot_role(self, ctx, role: discord.Role=None):
         """Set the role to put bots in when they join.
+
         Leave blank to not give them a role."""
         server = ctx.message.server
         self.settings[server.id]["BOTS_ROLE"] = role.name if role else role
@@ -170,10 +175,12 @@ class Bye:
     @byeset.command(pass_context=True)
     async def whisper(self, ctx, choice: str=None):
         """Sets whether or not a DM is sent to the new user
+
         Options:
             off - turns off DMs to users
             only - only send a DM to the user, don't send a bye to the channel
             both - send a message to both the user and the channel
+
         If Option isn't specified, toggles between 'off' and 'only'
         DMs will not be sent to bots"""
         options = {"off": False, "only": True, "both": "BOTH"}
@@ -322,10 +329,9 @@ def check_files():
         fileIO(f, "save", current)
 
 
-
 def setup(bot):
     check_folders()
     check_files()
     n = Bye(bot)
     bot.add_listener(n.member_remove, "on_member_remove")
-bot.add_cog(n)
+    bot.add_cog(n)
