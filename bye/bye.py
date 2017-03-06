@@ -16,7 +16,7 @@ default_settings = {"GREETING": [default_greeting], "ON": False,
 settings_path = "data/bye/settings.json"
 
 
-class bye:
+class Bye:
     """byes new members to the server in the default channel"""
 
     def __init__(self, bot):
