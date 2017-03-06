@@ -206,7 +206,7 @@ class Bye:
                                         "as a DM".format(channel))
         await self.send_testing_msg(ctx)
 
-    async def member_join(self, member):
+    async def member_remove(self, member):
         server = member.server
         if server.id not in self.settings:
             self.settings[server.id] = deepcopy(default_settings)
